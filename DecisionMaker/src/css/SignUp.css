@@ -1,0 +1,118 @@
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.signup-card {
+  background: #fff;
+  padding: 2rem;
+  width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.08);
+}
+
+.signup-tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+
+.tab {
+  background: none;
+  border: none;
+  padding-bottom: 0.5rem;
+  font-weight: bold;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  color: #6b7280;
+  text-decoration: none;
+}
+
+.tab:hover {
+  color: #2563eb;
+}
+
+.tab.active {
+  border-bottom: 2px solid #2563eb;
+  color: #2563eb;
+}
+
+.centered-text {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.centered-text h2 {
+  font-size: 1.5rem;
+  color: #1e293b;
+  margin-bottom: 0.3rem;
+}
+
+.centered-text .subtitle {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.input-wrapper {
+  position: relative;
+  margin-top: 0.3rem;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 0.8rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.icon, .toggle-pass {
+  position: absolute;
+  right: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+.checkbox-row {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #4b5563;
+}
+
+.checkbox-row label {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.checkbox-row a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.checkbox-row a:hover {
+  text-decoration: underline;
+}
+
+.signup-btn {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.6rem;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
