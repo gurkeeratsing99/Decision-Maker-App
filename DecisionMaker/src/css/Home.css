@@ -1,0 +1,68 @@
+.home-container {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #fdf0e9, #f9fafb);
+  min-height: 100vh;
+}
+
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.hero h2 {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #111827;
+}
+
+.hero p {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+}
+
+.action-buttons {
+    
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.home-action-btn {
+  width: 240px; /* 👈 fixed width to make them equal */
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.search-btn,
+.surprise-btn {
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.search-btn {
+  background: #f97316;
+  color: white;
+}
+
+.surprise-btn {
+  background: linear-gradient(to right, #f97316, #f59e0b);
+  color: white;
+}
+
+.search-btn:hover,
+.surprise-btn:hover {
+  transform: scale(1.05);
+}
