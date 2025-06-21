@@ -2,7 +2,9 @@ import { Link } from 'react-router-dom';
 import '../css/Home.css';
 import NavBar from './NavBar';
 
+
 export default function Home() {
+
   return (
     <div className="home-container">
       <NavBar />
