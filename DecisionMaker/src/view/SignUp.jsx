@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/SignUp.css';
-import { signUp, createAcc} from '../backend/sign-up';
+import { signUp, createAcc} from '../auth/sign-up';
 
 export default function SignUp() {
   const [form, setForm] = useState({

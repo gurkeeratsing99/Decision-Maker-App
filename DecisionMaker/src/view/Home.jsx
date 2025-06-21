@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
 import '../css/Home.css';
 import NavBar from './NavBar';
-// import supabase from '../config/supabaseClient';
 
 
 export default function Home() {
-  // console.log('Supabase Client:', supabase);
+
   return (
     <div className="home-container">
       <NavBar />
