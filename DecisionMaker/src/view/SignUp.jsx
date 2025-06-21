@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/SignUp.css';
+import { signUp, createAcc} from '../backend/sign-up';
 
 export default function SignUp() {
   const [form, setForm] = useState({
@@ -17,12 +18,33 @@ export default function SignUp() {
     setForm({ ...form, [name]: type === 'checkbox' ? checked : value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.agree) return alert("You must agree to the terms.");
     if (form.password !== form.confirmPassword) return alert("Passwords do not match.");
+
+    const fullName = form.name.trim().split(' ');
+    const firstName = fullName[0];
+    const lastName = fullName.slice(1).join(' ') || '';
+
     console.log("Creating account with:", form);
+
     // TODO: Hook to Supabase signUp
+    const { data, error } = await signUp(form.email, form.password);
+    
+    if (error) {
+      return alert("Error during sign up: " + error.message);
+    }
+
+    const { id: userID, email: userEmail } = data.user;
+    const { data: accountData, error: accountError } = await createAcc(userID, userEmail, firstName, lastName);
+
+    if (accountError) {
+      return alert("Error creating user account: " + accountError);
+    }
+
+    console.log("Account sucessfully created: ", accountData);
+
   };
 
   return (
