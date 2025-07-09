@@ -42,7 +42,7 @@
 }
 
 .search-btn,
-.surprise-btn {
+.glow-always{
   padding: 0.9rem 1.5rem;
   font-size: 1rem;
   font-weight: bold;
@@ -52,17 +52,88 @@
   transition: all 0.2s ease-in-out;
 }
 
-.search-btn {
+.search-btn,
+.glow-always {
   background: #f97316;
   color: white;
 }
 
-.surprise-btn {
-  background: linear-gradient(to right, #f97316, #f59e0b);
-  color: white;
+
+.search-btn{
+  transform: scale(1.05);
 }
 
-.search-btn:hover,
-.surprise-btn:hover {
-  transform: scale(1.05);
+.glow-always {
+  position: relative;
+  z-index: 0;
+}
+
+/* Animated glowing background */
+.glow-always::before {
+  content: '';
+  background: linear-gradient(
+    45deg,
+    #f97316,  /* orange-500 */
+    #38bdf8,  /* sky-400 */
+    #facc15,  /* yellow-400 */
+    #a855f7,  /* purple-500 */
+    #f97316   /* loop back to orange-500 */
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(6px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 12s linear infinite;
+  opacity: 1;
+  border-radius: 10px;
+}
+
+/* Background layer below button */
+.glow-always::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+   background: #f97316;
+  border-radius: 10px;
+}
+
+.glow-always:active {
+  color: #000;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
+}
+
+.typewriter-wrapper {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #111827;
+  min-height: 3rem; /* reserve space */
+}
+
+.hero-content {
+  margin-top: 1.5rem;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero-content.fade-in {
+  opacity: 1;
+}
+
+.hero-subheading {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
 }

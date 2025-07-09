@@ -1,17 +1,33 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/SignIn.css'
+import { signIn } from '../auth/sign-in';
 
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPass, setShowPass] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
     // Call Supabase signIn function here
     console.log("Signing in with", email, password);
+    
+    const { user, session, error } = await signIn(email, password);
+    
+    if (error) {
+      alert("Incorrect password or email. Please try again.")
+      return;
+    }
+
+    console.log("Signed in user: ", user);
+    console.log("Session: ", session);
+    navigate('/');
+    
+    console.log("Signed in Successfully!");
+
   };
 
   return (
