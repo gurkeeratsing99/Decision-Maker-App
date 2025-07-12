@@ -1,0 +1,63 @@
+
+.history-page {
+  background: #f9fafb;
+  min-height: 100vh;
+}
+
+.history-wrapper {
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.history-wrapper h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #111827;
+}
+
+.history-section {
+  margin-bottom: 2rem;
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.04);
+}
+
+.date-heading {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #f97316;
+}
+
+.grouped-date-block ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.history-card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.card-details {
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.timestamp {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+}

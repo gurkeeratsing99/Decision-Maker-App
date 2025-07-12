@@ -13,11 +13,11 @@ export default function NavBar() {
 
   return (
     <nav className="navbar">
-      <h1 className="logo">Decision Maker</h1>
+      <h1 className="logo"><Link to="/">Decision Maker</Link></h1>
       <div className="nav-links">
         <Link to="/">Discover</Link>
         <Link to="/history">History</Link>
-        <Link to="/groups">Groups</Link>
+        <Link to="/loves">Loves</Link>
 
         {user ? (
           <>

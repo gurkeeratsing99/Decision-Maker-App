@@ -1,0 +1,66 @@
+/* Loves.css */
+.loves-page {
+  padding: 2rem;
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+.loves-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+
+.loves-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+ .love-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease;
+  position: relative; /* ← Add this */
+}
+
+
+.love-card:hover {
+  transform: scale(1.02);
+}
+
+.love-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.love-info {
+  padding: 1rem;
+}
+
+.love-info h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #111827;
+}
+
+.love-info p {
+  margin: 0.25rem 0;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.unlove-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.unlove-btn:hover {
+  transform: scale(1.2);
+}

@@ -70,6 +70,31 @@ app.post('/api/log-search', async (req, res) => {
   res.json({ success: true });
 });
 
+app.get("/api/history/search", async (req, res) => {
+  const { user_id } = req.query;
+  const { data, error } = await supabase
+    .from("search_history")
+    .select("*")
+    .eq("user_id", user_id)
+    .order("searched_at", { ascending: false });
+
+  if (error) return res.status(500).json({ error });
+  res.json(data);
+});
+
+app.get("/api/history/surprise", async (req, res) => {
+  const { user_id } = req.query;
+  const { data, error } = await supabase
+    .from("surprise_history")
+    .select("*")
+    .eq("user_id", user_id)
+    .order("viewed_at", { ascending: false });
+
+  if (error) return res.status(500).json({ error });
+  res.json(data);
+});
+
+
 // ✅ Yelp Search API
 app.get('/api/search', async (req, res) => {
   const {
@@ -147,6 +172,72 @@ app.get('/api/surprise', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch random restaurant' });
   }
 });
+
+
+// Route to add a restaurant to loves
+app.post('/api/love', async (req, res) => {
+  const {
+    user_id,
+    restaurant_id,
+    restaurant_name,
+    image_url,
+    address,
+    rating,
+    price
+  } = req.body;
+
+  console.log("❤️ Received love:", req.body); // 🔍 add this
+
+  const { error } = await supabase
+    .from('loved_restaurants')
+    .insert([{
+      user_id,
+      restaurant_id,
+      restaurant_name,
+      image_url,
+      address,
+      rating,
+      price,
+      loved_at: new Date()
+    }]);
+
+  if (error) {
+    console.error("❌ Insert error:", error);
+    return res.status(500).json({ error: error.message });
+  }
+
+  res.json({ success: true });
+});
+
+// Route to get all loves for a user
+app.get('/api/loves', async (req, res) => {
+  const { user_id } = req.query;
+
+  const { data, error } = await supabase
+    .from('loved_restaurants')
+    .select('*')
+    .eq('user_id', user_id)
+    .order('loved_at', { ascending: false });
+
+  if (error) return res.status(500).json({ error });
+  res.json(data);
+});
+
+
+
+app.delete('/api/unlove', async (req, res) => {
+  const { user_id, restaurant_id } = req.body;
+
+  const { error } = await supabase
+    .from('loved_restaurants')
+    .delete()
+    .eq('user_id', user_id)
+    .eq('restaurant_id', restaurant_id);
+
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ success: true });
+});
+
 
 const PORT = 4000;
 app.listen(PORT, () => {

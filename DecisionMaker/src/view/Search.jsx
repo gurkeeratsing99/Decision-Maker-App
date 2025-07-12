@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import NavBar from '../view/NavBar';
 import '../css/Search.css';
 import { useAuth } from '../auth/AuthContext';
+import supabase from '../config/supabaseClient';
 
 export default function Search() {
   const location = useLocation();
@@ -25,6 +26,25 @@ export default function Search() {
   const [openNow, setOpenNow] = useState(false);
 
   const { user } = useAuth();
+  const [lovedIds, setLovedIds] = useState([]);
+  
+
+  useEffect(() => {
+  const fetchInitialData = async () => {
+    const { data: { user: currentUser } } = await supabase.auth.getUser();
+    if (!currentUser) return;
+
+    try {
+      const loveRes = await fetch(`http://localhost:4000/api/loves?user_id=${currentUser.id}`);
+      const loveData = await loveRes.json();
+      setLovedIds(loveData.map(item => item.restaurant_id));
+    } catch (err) {
+      console.error("Failed to fetch loved restaurants:", err);
+    }
+  };
+
+  fetchInitialData();
+}, []);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -102,6 +122,76 @@ export default function Search() {
     return R * c;
   };
 
+  //handle loves
+  const handleLove = async (res) => {
+    if (!user) {
+      alert("Please sign in to save favorites.");
+      return;
+    }
+    if (lovedIds.includes(res.id)) return;
+
+    const payload = {
+      user_id: user.id,
+      restaurant_id: res.id,
+      restaurant_name: res.name,
+      image_url: res.image_url,
+      address: `${res.location?.address1}, ${res.location?.city}`,
+      rating: res.rating,
+      price: res.price
+    };
+
+    try {
+      const response = await fetch('http://localhost:4000/api/love', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+
+      if (!response.ok) throw new Error("Failed to save love");
+      setLovedIds(prev => [...prev, res.id]);
+    } catch (err) {
+      console.error('Love error:', err);
+    }
+  };
+
+  const handleToggleLove = async (res) => {
+    if (!user) return;
+
+    const isLoved = lovedIds.includes(res.id);
+
+    const url = isLoved ? 'http://localhost:4000/api/unlove' : 'http://localhost:4000/api/love';
+    const method = isLoved ? 'DELETE' : 'POST';
+
+    const payload = {
+      user_id: user.id,
+      restaurant_id: res.id,
+      restaurant_name: res.name,
+      image_url: res.image_url,
+      address: `${res.location?.address1}, ${res.location?.city}`,
+      rating: res.rating,
+      price: res.price
+    };
+
+    try {
+      const response = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) throw new Error("Love toggle failed");
+
+      setLovedIds((prev) =>
+        isLoved ? prev.filter((id) => id !== res.id) : [...prev, res.id]
+      );
+    } catch (err) {
+      console.error('Toggle love error:', err);
+    }
+  };
+
+  
+
   return (
     <div className="search-page">
       <NavBar />
@@ -114,7 +204,7 @@ export default function Search() {
 
           {/* Search by Name */}
           <div>
-            <label className="block mb-1 text-sm font-medium text-gray-700">Restaurant Name</label>
+            <label className="block mb-1 text-sm font-medium text-gray-700">What do you want to eat?</label>
             <input
               type="text"
               value={queryInput}
@@ -136,8 +226,18 @@ export default function Search() {
             />
           </div>
 
+          
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="bg-white hover:btn2 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow w-50 mt-5"
+          >
+            🔍 Search
+          </button>
+
           {/* Filters */}
           <div className="flex flex-wrap justify-center items-end gap-3.5">
+            <label className="block mb-1 text-sm font-medium text-gray-700">Filter By</label>
             {/* Price Filter */}
             <div>
               <label className="block mb-1 text-sm font-medium text-gray-700">💲 Price</label>
@@ -182,13 +282,6 @@ export default function Search() {
             </div>
           </div>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="bg-white hover:btn2 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow w-50 mt-5"
-          >
-            🔍 Search
-          </button>
         </form>
       </div>
 
@@ -219,6 +312,19 @@ export default function Search() {
                       className="h-40 w-full object-cover"
                     />
                   </div>
+
+                  {/* Add to loves icon */}
+                   <div className="absolute top-2 right-2">
+                      <button 
+                        onClick={() => handleToggleLove(res)}
+                        className={`text-xl transition-transform duration-150 ${
+                          lovedIds.includes(res.id) ? 'text-red-500 scale-110' : 'text-gray-400 hover:text-red-500'
+                        }`}
+                        title={lovedIds.includes(res.id) ? "Unlove" : "Add to Loves"}
+                      >
+                        {lovedIds.includes(res.id) ? '❤️' : '🤍'}
+                      </button>
+                    </div>
 
                   <div className="text-center mt-6">
                     <h3 className="text-xl font-bold text-black">{res.name}</h3>
