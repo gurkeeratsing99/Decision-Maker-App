@@ -36,7 +36,7 @@ export default function Home() {
           <div className="hero-content fade-in">
             <p className="hero-subheading">
               {user
-                ? `Welcome back, ${user.email}!`
+                ? `Welcome back, 👋 ${user.first_name}!`
                 : "Pick a path — search with filters or let us surprise you!"}
             </p>
 

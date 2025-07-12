@@ -1,13 +1,20 @@
-import supabase from "../config/supabaseClient";
-
 export async function signIn(email, password) {
-    let { data, error } = await supabase.auth.signInWithPassword({ email, password });
+  const res = await fetch("http://localhost:4000/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
 
-    if (error) {
-       return { error: error.message };
-    }
+  const result = await res.json();
 
-    const { user, session } = data;
-    return { user, session };
+  if (!res.ok) {
+    return { error: result.error };
+  }
 
+  // ✅ Save token BEFORE returning
+  if (result.session?.access_token) {
+    localStorage.setItem("access_token", result.session.access_token);
+  }
+
+  return { user: result.user, session: result.session };
 }

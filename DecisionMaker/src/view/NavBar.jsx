@@ -1,14 +1,15 @@
-import { Link } from 'react-router-dom';
+// src/view/NavBar.jsx
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/NavBar.css';
 import { useAuth } from '../../src/auth/AuthContext';
-import supabase from '../config/supabaseClient'; // needed for logout
 
 export default function NavBar() {
-  const { user, setUser } = useAuth(); 
+  const { user, logout } = useAuth();  // ✅ use logout from context
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setUser(null); 
+    await logout();      // ✅ call context logout
+    navigate("/signin"); // ✅ then redirect
   };
 
   return (
@@ -21,8 +22,8 @@ export default function NavBar() {
 
         {user ? (
           <>
-            <span className="user-greeting">👋 {user.email}</span>
-            <button onClick={handleLogout} className="logout-btn">Logout</button>
+            
+            <button onClick={handleLogout} className="logout-btn cta-btn">Logout</button>
           </>
         ) : (
           <>
