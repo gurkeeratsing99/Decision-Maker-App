@@ -1,7 +1,7 @@
 // Loves.jsx
 import { useEffect, useState } from 'react';
 import supabase from '../config/supabaseClient';
-import NavBar from './NavBar';
+import NavBar from '../view/NavBar';
 import '../css/Loves.css';
 import { Link } from 'react-router-dom';
 
@@ -53,7 +53,7 @@ export default function Loves() {
     <div className="loves-page">
       <NavBar />
       <div className="loves-wrapper">
-        <h2 style={{ textAlign: 'center', fontWeight: 'bold' }}>❤️ Your Loved Restaurants</h2>
+        <h2 className="text-xl font-semibold text-gray-800 text-center"> Your Loved Restaurants</h2>
 
         {loading ? (
           <p>Loading...</p>
