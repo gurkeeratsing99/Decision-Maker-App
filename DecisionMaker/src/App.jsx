@@ -1,3 +1,7 @@
+import SurpriseMe from './view/SurpriseMe';
+import History from './view/History';
+
+
 import History from './view/History';
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
@@ -22,6 +26,8 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/surprise" element={<Surprise />} />
         <Route path="/history" element={<History />} />
+          <Route path="/surpriseme" element={<SurpriseMe />} />
+  <Route path="/history" element={<History />} />
 
 
       </Routes>
