@@ -1,0 +1,26 @@
+.surprise-container {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.surprise-button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.surprise-button:hover {
+  background-color: #1e40af;
+}
+
+.suggestion-box {
+  margin-top: 30px;
+  font-size: 1.3rem;
+  color: #1f2937;
+  font-weight: 500;
+}
