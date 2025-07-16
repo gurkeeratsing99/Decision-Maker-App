@@ -21,6 +21,8 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/search" element={<Search />} />
         <Route path="/surprise" element={<Surprise />} />
+        <Route path="/history" element={<History />} />
+
 
       </Routes>
     </Router>
