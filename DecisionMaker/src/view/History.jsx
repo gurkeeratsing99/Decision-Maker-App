@@ -1,3 +1,4 @@
+import '../css/History.css';
 import { useState, useEffect } from 'react';
 
 const dummyHistory = [
