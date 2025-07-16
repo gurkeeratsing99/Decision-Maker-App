@@ -1,3 +1,4 @@
+import '../css/SurpriseMe.css';
 import { useState } from 'react';
 
 const sampleRestaurants = [
