@@ -1,13 +1,28 @@
 import { Link } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../src/auth/AuthContext'; 
 import '../css/Home.css';
 import NavBar from '../view/NavBar';
+import getFirstName from '../utils/getFirstName';
+import supabase from '../config/supabaseClient';
 
 export default function Home() {
   const [typingDone, setTypingDone] = useState(false);
   const { user } = useAuth(); 
+  const [ fisrtName, setFirstName ] = useState('');
+
+  useEffect(() => {
+    async function fetchName() {
+      const name = await getFirstName(user.id);
+      if (name && name.length > 0) {
+        setFirstName(name);
+      }
+    }
+    if (user) {
+      fetchName();
+    }
+  }, [user])
 
   return (
     
@@ -32,11 +47,11 @@ export default function Home() {
           />
         </h2>
 
-        {typingDone && (
+        
           <div className="hero-content fade-in">
             <p className="hero-subheading">
               {user
-                ? `Welcome back, ${user.email}!`
+                ? `Welcome back, ${fisrtName}!`
                 : "Pick a path — search with filters or let us surprise you!"}
             </p>
 
@@ -50,7 +65,6 @@ export default function Home() {
               </Link>
             </div>
           </div>
-        )}
       </section>
     </div>
   );

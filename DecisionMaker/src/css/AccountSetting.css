@@ -1,0 +1,167 @@
+.profile-container {
+    background-color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    padding: 2.5rem;
+    max-width: 800px;
+    min-width: 600px;
+    margin: 60px auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.edit-profile-container {
+    margin-left: 4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-profile-container h3 {
+    font-weight: bolder;
+    margin-bottom: 2px;
+}
+
+.user-profile-container {
+    text-align: left;
+    margin-bottom: 6rem;
+}
+
+.account-setting {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.profile-pic {
+    background: url("../assets/default-avatar.png");
+    background-size: cover;
+    height: 128px;
+    width: 128px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile-username {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 70px;
+}
+
+.profile-info {
+    font-size: 18px;
+    text-align: center;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile-info p {
+    margin-top: 20px;
+}
+
+.btn-edit-profile {
+    padding: 5px 12px;
+    color: white;
+    background-color: #a9adb4;
+    border-radius: 5px;
+    width: fit-content;
+    cursor: pointer;
+    margin: 2rem auto;
+}
+
+.btn-change {
+    margin-left: 10px; 
+    color: #2a9fbd;
+}
+
+.input-form input {
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    align-self: flex-end;
+    
+} 
+
+.btn-save {
+    padding: 5px 12px;
+    color: white;
+    background-color: #f97316;
+    border-radius: 5px;
+    width: fit-content;
+    cursor: pointer;
+    
+    
+}
+
+/* Mobile */
+@media only screen and (max-width: 600px) {
+    .profile-container {
+        margin: 10px;
+        padding: 1.5rem; 
+        max-width: 100%; 
+        min-width: auto; 
+        flex-direction: column; 
+    }
+
+    .user-profile-container {
+        align-items: center; 
+        text-align: center; 
+        margin-bottom: 2rem;
+    }
+
+    .account-setting {
+        font-size: 20px;
+        margin: 0 0 10px 0;
+    }
+
+    .profile-pic {
+        height: 100px;
+        width: 100px;
+        margin: 0 auto 15px;
+    }
+
+    .profile-username {
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    .profile-info {
+        font-size: 14px;
+        align-items: center;
+
+    }
+
+    .profile-info h3 {
+        font-weight: bold;
+    }
+
+    .btn-edit-profile {
+        display: flex;
+        text-align: center;
+        width: fit-content;
+        padding: 5px 10px;
+        font-size: 14px;
+        margin-top: 15px;
+    }
+
+    .btn-change {
+        margin-left: 5px;
+    }
+
+    .edit-profile-container {
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+
+}
