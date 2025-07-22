@@ -9,5 +9,4 @@ export async function signIn(email, password) {
 
     const { user, session } = data;
     return { user, session };
-
 }
