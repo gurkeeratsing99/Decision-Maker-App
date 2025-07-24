@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/SignUp.css';
-import { signUp, createAcc} from '../auth/sign-up';
+import { signUp, createAcc } from '../auth/sign-up';
 
 export default function SignUp() {
   const [form, setForm] = useState({
@@ -12,6 +12,7 @@ export default function SignUp() {
     agree: false
   });
   const [showPass, setShowPass] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -27,24 +28,24 @@ export default function SignUp() {
     const firstName = fullName[0];
     const lastName = fullName.slice(1).join(' ') || '';
 
-    console.log("Creating account with:", form);
-
-    // TODO: Hook to Supabase signUp
     const { data, error } = await signUp(form.email, form.password);
-    
     if (error) {
-      return alert("Error during sign up: " + error.message);
+      alert("Error during sign up: " + error.message);
+      return;
     }
 
     const { id: userID, email: userEmail } = data.user;
     const { data: accountData, error: accountError } = await createAcc(userID, userEmail, firstName, lastName);
 
     if (accountError) {
-      return alert("Error creating user account: " + accountError);
+      alert("Error creating user account: " + accountError.message);
+      return;
     }
 
-    console.log("Account sucessfully created: ", accountData);
-
+    alert("Account successfully created! Redirecting to sign in page...");
+    setTimeout(() => {
+      navigate('/signin');
+    }, 1000);
   };
 
   return (
@@ -135,3 +136,4 @@ export default function SignUp() {
     </div>
   );
 }
+

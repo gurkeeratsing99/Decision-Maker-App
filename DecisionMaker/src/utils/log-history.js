@@ -2,7 +2,7 @@ import supabase from "../config/supabaseClient";
 
 
 export async function logSearchHistory(userId, searchParams) {
-  const fallbackUserId = userId || 99999;
+  const fallbackUserId = userId || '321eb7ea-360e-48bf-949a-b02602d4059a';
 
   const { data, error } = await supabase.from("search_history").insert([
     {
@@ -22,7 +22,7 @@ export async function logSearchHistory(userId, searchParams) {
 
 // Log a surprise result
 export async function logSurpriseHistory(userId, restaurantName) {
-  const fallbackUserId = userId || 99999;
+  const fallbackUserId = userId || '321eb7ea-360e-48bf-949a-b02602d4059a';
 
   const { data, error } = await supabase.from("surprise_history").insert([
     {

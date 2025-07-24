@@ -60,7 +60,7 @@ export default function Search() {
   useEffect(() => {
     const fetchRestaurants = async () => {
       const payload = {
-        user_id: user?.id || 99999,
+        user_id: user?.id || '321eb7ea-360e-48bf-949a-b02602d4059a',
         query: query || cuisine,
         location: selectedLocation || 'Vancouver',
         cuisine,

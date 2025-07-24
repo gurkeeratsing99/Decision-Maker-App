@@ -51,7 +51,7 @@ export default function Surprise() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            user_id: user?.id || 99999,
+            user_id: user?.id || '321eb7ea-360e-48bf-949a-b02602d4059a',
             restaurant_name: data.name,
           }),
         });
