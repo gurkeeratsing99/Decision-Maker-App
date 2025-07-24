@@ -1,167 +1,129 @@
-.profile-container {
-    background-color: white;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    border-radius: 16px;
-    padding: 2.5rem;
-    max-width: 800px;
-    min-width: 600px;
-    margin: 60px auto;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+.account-settings {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 4rem;
 }
 
-.edit-profile-container {
-    margin-left: 4rem;
-    display: flex;
-    flex-direction: column;
+.settings-container {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  padding: 2rem 3rem;
+  max-width: 500px;
+  width: 100%;
 }
 
-.edit-profile-container h3 {
-    font-weight: bolder;
-    margin-bottom: 2px;
+.settings-container h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #111827;
 }
 
-.user-profile-container {
-    text-align: left;
-    margin-bottom: 6rem;
+.setting-field {
+  margin-bottom: 1.2rem;
 }
 
-.account-setting {
-    font-size: 28px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 1.5rem;
+.setting-field label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  color: #374151;
 }
 
-.profile-pic {
-    background: url("../assets/default-avatar.png");
-    background-size: cover;
-    height: 128px;
-    width: 128px;
-    border-radius: 50%;
-    margin-left: auto;
-    margin-right: auto;
+.setting-field p,
+.setting-field input {
+  font-size: 1rem;
+  width: 100%;
+  color: #111827;
 }
 
-.profile-username {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 10px 70px;
+.setting-field input {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  outline: none;
 }
 
-.profile-info {
-    font-size: 18px;
-    text-align: center;
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
+.button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
 }
 
-.profile-info p {
-    margin-top: 20px;
+.primary-btn {
+  background-color: #f97316;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-.btn-edit-profile {
-    padding: 5px 12px;
-    color: white;
-    background-color: #a9adb4;
-    border-radius: 5px;
-    width: fit-content;
-    cursor: pointer;
-    margin: 2rem auto;
+.primary-btn:hover {
+  background-color: #bb6a2f;
+}
+.secondary-btn {
+  background-color: #e5e7eb;
+  color: #1f2937;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-.btn-change {
-    margin-left: 10px; 
-    color: #2a9fbd;
+.secondary-btn:hover {
+  background-color: #d1d5db;
+}
+.readonly-field {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background-color: #f3f4f6;
+  color: #4b5563;
+  font-size: 1rem;
+  cursor: not-allowed;
 }
 
-.input-form input {
-    padding: 8px;
-    font-size: 16px;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    align-self: flex-end;
-    
-} 
-
-.btn-save {
-    padding: 5px 12px;
-    color: white;
-    background-color: #f97316;
-    border-radius: 5px;
-    width: fit-content;
-    cursor: pointer;
-    
-    
+.change-btn {
+  background-color: #f97316; /* yellow-400 */
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-/* Mobile */
-@media only screen and (max-width: 600px) {
-    .profile-container {
-        margin: 10px;
-        padding: 1.5rem; 
-        max-width: 100%; 
-        min-width: auto; 
-        flex-direction: column; 
-    }
+.change-btn:hover {
+  background-color: #bb6a2f; /* yellow-500 */
+}
+.password-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    .user-profile-container {
-        align-items: center; 
-        text-align: center; 
-        margin-bottom: 2rem;
-    }
+.password-link {
+  font-size: 0.95rem;
+  color: #3b82f6; /* blue-500 */
+  text-decoration: underline;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
 
-    .account-setting {
-        font-size: 20px;
-        margin: 0 0 10px 0;
-    }
-
-    .profile-pic {
-        height: 100px;
-        width: 100px;
-        margin: 0 auto 15px;
-    }
-
-    .profile-username {
-        font-size: 18px;
-        margin: 10px 0;
-    }
-
-    .profile-info {
-        font-size: 14px;
-        align-items: center;
-
-    }
-
-    .profile-info h3 {
-        font-weight: bold;
-    }
-
-    .btn-edit-profile {
-        display: flex;
-        text-align: center;
-        width: fit-content;
-        padding: 5px 10px;
-        font-size: 14px;
-        margin-top: 15px;
-    }
-
-    .btn-change {
-        margin-left: 5px;
-    }
-
-    .edit-profile-container {
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-    }
-
-
+.password-link:hover {
+  color: #2563eb; /* blue-600 */
 }

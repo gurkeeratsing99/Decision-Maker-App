@@ -6,71 +6,71 @@ import { useAuth } from '../auth/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function PasswordReset() {
-    const navigate = useNavigate();
-    const { user, setUser } = useAuth();
-    const [ form, setForm ] = useState({
-        password: '',
-        newPassword: '',
-        confirmPassword: '',
-    });
-    
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setForm({ ...form, [name]: value });
-    }
+  const navigate = useNavigate();
+  const { user, setUser } = useAuth();
+  const [successMsg, setSuccessMsg] = useState('');
+  const [form, setForm] = useState({
+    newPassword: '',
+    confirmPassword: '',
+  });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (form.newPassword !== form.confirmPassword) {
-            alert('Passwords do not match. Please try again.');
-        } else {
-            resetPassword(form.newPassword);
-            navigate('/profile')
-        }
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
 
-    if (user) {
-        return (
-            <>
-                <NavBar />
-                <div className="password-reset-container">
-                    <h1>Reset Account Password</h1>
-                    <p>Enter a new password.</p>
-                    
-                    <form className='input-wrapper' onSubmit={handleSubmit}>
-                    
-                    <h3>New Password *</h3>
-                        <input
-                        type="password"
-                        placeholder="Enter New Password"
-                        name="newPassword"
-                        required
-                        value={form.newPassword}
-                        onChange={handleChange}
-                        />
-                    
-                    
-                    <h3>Re-enter New Password * </h3>
-                        <input
-                        type="password"
-                        placeholder="Enter New Password"
-                        name="confirmPassword"
-                        required
-                        value={form.confirmPassword}
-                        onChange={handleChange}
-                        />
-                    
-                    <Link to='/profile'><button className="btn-cancel-password">Cancel</button></Link>
-                    <button className="btn-reset-password">Reset Password</button>
-                    </form>
-                </div>
-            </>
-            ); 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (form.newPassword !== form.confirmPassword) {
+      alert('Passwords do not match. Please try again.');
     } else {
-        setUser(null);
-        <Link to="/signup"></Link>
+      await resetPassword(form.newPassword);
+      setSuccessMsg('✅ Password reset successfully! Redirecting...');
+      setTimeout(() => navigate('/profile'), 2000); // 2 second delay before redirect
     }
-    
-    
-        
+  };
+
+  if (!user) {
+    setUser(null);
+    return <Link to="/signup" />;
+  }
+
+  return (
+    <>
+      <NavBar />
+      <div className="password-reset-container">
+        <h2>🔐 Reset Password</h2>
+        <p>Enter a new password to update your account.</p>
+
+        {successMsg && <div className="success-alert">{successMsg}</div>}
+
+        <form className="password-reset-form" onSubmit={handleSubmit}>
+          <label>New Password</label>
+          <input
+            type="password"
+            name="newPassword"
+            placeholder="Enter new password"
+            required
+            value={form.newPassword}
+            onChange={handleChange}
+          />
+
+          <label>Confirm Password</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Re-enter new password"
+            required
+            value={form.confirmPassword}
+            onChange={handleChange}
+          />
+
+          <div className="btn-group">
+            <Link to="/profile" className="btn cancel">Cancel</Link>
+            <button type="submit" className="btn primary">Reset</button>
+          </div>
+        </form>
+      </div>
+    </>
+  );
 }
