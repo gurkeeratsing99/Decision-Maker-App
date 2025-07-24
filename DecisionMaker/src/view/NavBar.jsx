@@ -4,10 +4,13 @@ import { useAuth } from '../../src/auth/AuthContext';
 import supabase from '../config/supabaseClient'; // needed for logout
 import { useState, useEffect } from 'react';
 import getFirstName from '../utils/getFirstName';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function NavBar() {
   const { user, setUser } = useAuth(); 
   const [ firstName, setFirstName ] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchName() {
@@ -25,7 +28,7 @@ export default function NavBar() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    setUser(null); 
+    navigate('/');
   };
 
   return (

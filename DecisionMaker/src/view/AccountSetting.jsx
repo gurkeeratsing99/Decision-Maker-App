@@ -5,6 +5,7 @@ import getUserData, { updateUserData } from '../utils/userData';
 import '../css/AccountSetting.css';
 import { Link } from 'react-router-dom';
 
+
 export default function Profile() {
   const { user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
