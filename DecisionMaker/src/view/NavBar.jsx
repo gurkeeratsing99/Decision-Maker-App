@@ -33,14 +33,25 @@ export default function NavBar() {
       <h1 className="logo"><Link to="/">Decision Maker</Link></h1>
       <div className="nav-links">
         <Link to="/">Discover</Link>
-        <Link to="/history">History</Link>
+
+ {user ? (
+          <>
+             <Link to="/history">History</Link>
         <Link to="/loves">Loves</Link>
+          </>
+        ) : (
+          <>
+          
+          </>
+        )}
+
+       
 
         {user ? (
           <>
             <span className="user-greeting">
               <Link to="/profile"> 👋 {firstName}</Link></span>
-            <button onClick={handleLogout} className="logout-btn">Logout</button>
+            <button onClick={handleLogout} className="cta-btn">Logout</button>
           </>
         ) : (
           <>
