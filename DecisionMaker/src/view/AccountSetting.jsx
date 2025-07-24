@@ -4,11 +4,11 @@ import { useAuth } from '../../src/auth/AuthContext';
 import getUserData, {updateUserData} from '../utils/userData';
 import PasswordReset from './PasswordReset';
 import '../css/AccountSetting.css';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Profile() {
     const { user, setUser } = useAuth();
+    const navigate = useNavigate();
     const [isEditing, setIsEditing] = useState(null);
 
     const [userInfo, setUserInfo] = useState({
@@ -66,14 +66,15 @@ export default function Profile() {
 
     };
 
-    return(
+    if (user) {
+        return(
         <>
             <NavBar />
             <div className='profile-container'>
 
                 <div className='user-profile-container'>
                 <h1 className='account-setting'>Account Setting</h1>
-                    <div className='profile-pic' />
+                    {/* <div className='profile-pic' /> */}
                     {/* <h1 className='profile-username'>{userInfo.first_name}</h1> */}
                     <button className='btn-edit-profile' onClick={() => setIsEditing(!isEditing)}>
                         {isEditing ? "Cancel" : "Edit Profile"}
@@ -133,4 +134,8 @@ export default function Profile() {
             </div>  
         </>    
     );
+    } else {
+        navigate('/signin');
+    }
+    
 }

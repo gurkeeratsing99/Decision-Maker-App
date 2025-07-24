@@ -35,16 +35,6 @@
     margin-bottom: 1.5rem;
 }
 
-.profile-pic {
-    background: url("../assets/default-avatar.png");
-    background-size: cover;
-    height: 128px;
-    width: 128px;
-    border-radius: 50%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .profile-username {
     font-size: 18px;
     font-weight: bold;
