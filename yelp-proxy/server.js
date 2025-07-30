@@ -238,8 +238,37 @@ app.delete('/api/unlove', async (req, res) => {
   res.json({ success: true });
 });
 
+//update email
+app.post('/api/admin/update-email', async (req, res) => {
+  const { user_id, new_email } = req.body;
+  console.log('➡️ Incoming request to update email:', { user_id, new_email });
+
+  if (!user_id || !new_email) {
+    return res.status(400).json({ error: 'Missing user_id or new_email' });
+  }
+
+  try {
+    const { data, error } = await supabase.auth.admin.updateUserById(user_id, {
+      email: new_email
+    });
+
+    if (error) {
+      console.error('Failed to update email:', error.message);
+      return res.status(500).json({ error: error.message });
+    }
+
+    console.log('Email updated:', data);
+    res.json({ success: true, updated_user: data });
+  } catch (err) {
+    console.error('Server error:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
 
 const PORT = 4000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+

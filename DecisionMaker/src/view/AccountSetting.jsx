@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import NavBar from "./NavBar";
 import { useAuth } from '../../src/auth/AuthContext';
-import getUserData, { updateUserData } from '../utils/userData';
+import getUserData, { updateUserData, updateEmail } from '../utils/userData';
 import '../css/AccountSetting.css';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -47,7 +47,15 @@ export default function Profile() {
     const { first_name, last_name, email } = userInfo;
     const updatedInfo = { first_name, last_name, email };
 
+    const emailUpdateResult = await updateEmail(user.id, email);
+
+    if (!emailUpdateResult.success) {
+      alert("Failed to update email: " + emailUpdateResult.error);
+      return;
+    }
+
     const success = await updateUserData(updatedInfo);
+
     if (success) {
       alert("Profile has been successfully updated");
       window.location.reload();
