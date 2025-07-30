@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import resetPassword from "../auth/reset-password";
 import NavBar from "./NavBar";
 import "../css/PasswordReset.css";
@@ -30,10 +30,11 @@ export default function PasswordReset() {
     }
   };
 
-  if (!user) {
-    setUser(null);
-    return <Link to="/signup" />;
-  }
+  useEffect(() => {
+    if (!user) {
+      navigate('/signin');
+    }
+  }, [user, navigate])
 
   return (
     <>

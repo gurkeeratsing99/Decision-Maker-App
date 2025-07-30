@@ -3,11 +3,12 @@ import NavBar from "./NavBar";
 import { useAuth } from '../../src/auth/AuthContext';
 import getUserData, { updateUserData } from '../utils/userData';
 import '../css/AccountSetting.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 export default function Profile() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
@@ -54,6 +55,12 @@ export default function Profile() {
       alert("Failed to update profile. Please try again.");
     }
   };
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/signin');
+    }
+  }, [user, navigate])
 
 return (
   <>
